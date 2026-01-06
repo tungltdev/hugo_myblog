@@ -11,23 +11,27 @@ Fallback to default behavior for external/static images.
 {{- $isRemote := or (hasPrefix $dest "http://") (hasPrefix $dest "https://") -}}
 
 {{- if $isRemote -}}
-  <img src="{{ $dest }}" alt="{{ $text }}" {{ with $title }}title="{{ . }}"{{ end }} loading="lazy" decoding="async" />
+  {{- $isFirst := eq .Ordinal 0 -}}
+  <img src="{{ $dest }}" alt="{{ $text }}" {{ with $title }}title="{{ . }}"{{ end }} loading="{{ cond $isFirst "eager" "lazy" }}" decoding="async" {{ if $isFirst }}fetchpriority="high"{{ end }} />
 {{- else -}}
   {{- $res := .Page.Resources.GetMatch $dest -}}
   {{- if not $res -}}
     {{/* Fallback: treat as static or relative path not in bundle */}}
-    <img src="{{ $dest }}" alt="{{ $text }}" {{ with $title }}title="{{ . }}"{{ end }} loading="lazy" decoding="async" />
+    {{- $isFirst := eq .Ordinal 0 -}}
+    <img src="{{ $dest }}" alt="{{ $text }}" {{ with $title }}title="{{ . }}"{{ end }} loading="{{ cond $isFirst "eager" "lazy" }}" decoding="async" {{ if $isFirst }}fetchpriority="high"{{ end }} />
   {{- else -}}
     {{- $alt := cond (ne $text "") $text ($res.Name) -}}
 
     {{/* SVG cannot be resized/converted with .Fit */}}
     {{- if eq $res.MediaType.SubType "svg" -}}
+      {{- $isFirst := eq .Ordinal 0 -}}
       <img
         src="{{ $res.RelPermalink }}"
         alt="{{ $alt }}"
         {{ with $title }}title="{{ . }}"{{ end }}
-        loading="lazy"
+        loading="{{ cond $isFirst "eager" "lazy" }}"
         decoding="async"
+        {{ if $isFirst }}fetchpriority="high"{{ end }}
       />
     {{- else -}}
       {{/* Raster images: generate responsive WebP srcset */}}
@@ -40,14 +44,16 @@ Fallback to default behavior for external/static images.
 
       {{- $default := $res.Fit "1280x webp" -}}
 
+      {{- $isFirst := eq .Ordinal 0 -}}
       <img
         src="{{ $default.RelPermalink }}"
         srcset="{{ delimit $srcset ", " }}"
         sizes="(max-width: 768px) 100vw, 768px"
         alt="{{ $alt }}"
         {{ with $title }}title="{{ . }}"{{ end }}
-        loading="lazy"
+        loading="{{ cond $isFirst "eager" "lazy" }}"
         decoding="async"
+        {{ if $isFirst }}fetchpriority="high"{{ end }}
       />
     {{- end -}}
   {{- end -}}
