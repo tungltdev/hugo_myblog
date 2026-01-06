@@ -1,0 +1,15 @@
+{{- $related := .Site.RegularPages.Related . | first (site.Params.relatedPostsCount | default 5) -}}
+{{- with $related -}}
+<div class="post-footer">
+    <h3 class="related-posts-title">{{ i18n "seeAlso" | default "Bài viết liên quan" }}</h3>
+    <ul class="related-posts-list">
+        {{- range . -}}
+        <li class="related-posts-item">
+            <a href="{{ .RelPermalink }}">
+                <span class="related-posts-item-title">{{- .Title -}}</span>
+            </a>
+        </li>
+        {{- end -}}
+    </ul>
+</div>
+{{- end -}}

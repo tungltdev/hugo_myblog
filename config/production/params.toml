@@ -1,2 +1,28 @@
 [analytics]
 tag = "G-XXXX"
+
+[params]
+# Reading experience
+ShowToc = true
+ShowReadingTime = true
+ShowWordCount = true
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+
+# Sharing / engagement
+ShowShareButtons = true
+ShowRssButtonInSectionTermList = true
+
+# UI helpers
+disableScrollToTop = false
+
+# Cover image behavior (PaperMod)
+[params.cover]
+  responsiveImages = true
+  linkFullImages = true
+  hiddenInSingle = false
+
+# Enable related posts
+ShowRelatedPosts = true
+relatedPostsCount = 6

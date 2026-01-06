@@ -6,3 +6,39 @@ relativeURLs = false
 disablePathToLower = false
 preserveTaxonomyNames = false
 removePathAccents = true
+
+# Enable JSON output for built-in search page (/search) in PaperMod
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+# Table of contents + code highlighting (better reading experience)
+[markup.tableOfContents]
+  startLevel = 2
+  endLevel = 4
+  ordered = false
+
+[markup.highlight]
+  noClasses = false
+  codeFences = true
+  guessSyntax = true
+  lineNos = false
+  lineNumbersInTable = false
+  tabWidth = 2
+
+# Related content settings (used by PaperMod when ShowRelatedPosts=true)
+[related]
+  threshold = 100
+  includeNewer = true
+  toLower = false
+
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+
+  [[related.indices]]
+    name = "categories"
+    weight = 90
+
+  [[related.indices]]
+    name = "date"
+    weight = 10

@@ -15,6 +15,9 @@ enableRobotsTXT = true
   ShowBreadCrumbs = true
   ShowPostNavLinks = true
   ShowCodeCopyButtons = true
+  ShowRelatedPosts = true
+  relatedPostsCount = 5
+
   ShowToc = true
   TocOpen = true
 
