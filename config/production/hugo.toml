@@ -1,4 +1,4 @@
-baseURL = "https://tungltdev.github.io/hugo_myblog/"
+baseURL = "https://tungltdev.github.io/hugo_myblog"
 canonifyURLs = true
 relativeURLs = false
 
