@@ -1,6 +1,6 @@
 baseURL = "http://localhost:1313/"
 languageCode = "vi-vn"
-title = "Tùng Blog – Hướng dẫn AI, SEO & Kiếm tiền Online"
+title = "Tùng Blog"
 theme = "PaperMod"
 
 enableRobotsTXT = true
@@ -18,10 +18,13 @@ enableRobotsTXT = true
   description = "Blog hướng dẫn AI, SEO, tự động hóa, Hugo & kiếm tiền online 2026."
 
 # ----- Navigation Menu -------------------
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 [menu]
   [[menu.main]]
-    name = "Trang chủ"
-    url = "/"
+    name = "Tìm kiếm"
+    url = "/search"
     weight = 1
 
   [[menu.main]]

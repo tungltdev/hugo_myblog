@@ -1,0 +1,12 @@
+/******** Custom overrides ********/
+
+/* Đẩy menu top sang góc phải */
+.nav #menu {
+  margin-inline-start: auto; /* đẩy các mục menu sát phải */
+}
+
+/* Nếu muốn thu nhỏ khoảng cách logo-menu */
+.logo {
+  margin-inline-end: var(--gap);
+}
+
