@@ -1,4 +1,54 @@
-{{- $u := .Destination -}}
-{{- $txt := .Text -}}
-{{- $title := .Title -}}
-<img src="{{ $u | safeURL }}" alt="{{ $txt }}" {{ with $title }} title="{{ . }}" {{ end }} loading="lazy" decoding="async">
+{{/*
+Render hook for Markdown images.
+Goal: if image is a Page Resource (Page Bundle), generate responsive images (WebP), lazy loading, and srcset.
+Fallback to default behavior for external/static images.
+*/}}
+
+{{- $dest := .Destination -}}
+{{- $text := .Text | default "" -}}
+{{- $title := .Title | default "" -}}
+
+{{- $isRemote := or (hasPrefix $dest "http://") (hasPrefix $dest "https://") -}}
+
+{{- if $isRemote -}}
+  <img src="{{ $dest }}" alt="{{ $text }}" {{ with $title }}title="{{ . }}"{{ end }} loading="lazy" decoding="async" />
+{{- else -}}
+  {{- $res := .Page.Resources.GetMatch $dest -}}
+  {{- if not $res -}}
+    {{/* Fallback: treat as static or relative path not in bundle */}}
+    <img src="{{ $dest }}" alt="{{ $text }}" {{ with $title }}title="{{ . }}"{{ end }} loading="lazy" decoding="async" />
+  {{- else -}}
+    {{- $alt := cond (ne $text "") $text ($res.Name) -}}
+
+    {{/* SVG cannot be resized/converted with .Fit */}}
+    {{- if eq $res.MediaType.SubType "svg" -}}
+      <img
+        src="{{ $res.RelPermalink }}"
+        alt="{{ $alt }}"
+        {{ with $title }}title="{{ . }}"{{ end }}
+        loading="lazy"
+        decoding="async"
+      />
+    {{- else -}}
+      {{/* Raster images: generate responsive WebP srcset */}}
+      {{- $w := slice 480 768 1024 1280 1600 -}}
+      {{- $srcset := slice -}}
+      {{- range $w -}}
+        {{- $img := $res.Fit (printf "%dx webp" .) -}}
+        {{- $srcset = $srcset | append (printf "%s %dw" $img.RelPermalink .) -}}
+      {{- end -}}
+
+      {{- $default := $res.Fit "1280x webp" -}}
+
+      <img
+        src="{{ $default.RelPermalink }}"
+        srcset="{{ delimit $srcset ", " }}"
+        sizes="(max-width: 768px) 100vw, 768px"
+        alt="{{ $alt }}"
+        {{ with $title }}title="{{ . }}"{{ end }}
+        loading="lazy"
+        decoding="async"
+      />
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
