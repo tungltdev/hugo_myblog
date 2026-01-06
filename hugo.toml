@@ -17,6 +17,34 @@ enableRobotsTXT = true
   defaultTheme = "light"
   description = "Blog hướng dẫn AI, SEO, tự động hóa, Hugo & kiếm tiền online 2026."
 
+# ----- Navigation Menu -------------------
+[menu]
+  [[menu.main]]
+    name = "Trang chủ"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    name = "Công nghệ"
+    url = "/categories/news/"
+    weight = 2
+
+  [[menu.main]]
+    name = "AI & Automation"
+    url = "/tags/ai/"
+    weight = 3
+
+  [[menu.main]]
+    name = "SEO"
+    url = "/tags/seo/"
+    weight = 4
+
+  [[menu.main]]
+    name = "Liên hệ"
+    url = "https://tungblog.example/contact"
+    weight = 5
+
+# ----- Minify ----------------------------
 [minify]
   disableXML = true
   minifyOutput = true
