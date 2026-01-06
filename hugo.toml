@@ -9,13 +9,27 @@ enableRobotsTXT = true
   pagerSize = 10
 
 [params]
+  defaultTheme = "light" # hoặc "auto"
+  description = "Blog hướng dẫn AI, SEO, tự động hóa, Hugo & kiếm tiền online 2026."
   ShowReadingTime = true
-  ShowShareButtons = true
   ShowBreadCrumbs = true
   ShowPostNavLinks = true
   ShowCodeCopyButtons = true
-  defaultTheme = "light"
-  description = "Blog hướng dẫn AI, SEO, tự động hóa, Hugo & kiếm tiền online 2026."
+  ShowToc = true
+  TocOpen = true
+
+  # Tối ưu UX
+  disableThemeToggle = false
+  disableScrollToTop = false
+
+  # SEO hiển thị
+  ShowShareButtons = true
+  ShowWordCount = true
+
+  # Ảnh cover hiển thị tối ưu
+  [params.cover]
+    responsiveImages = true
+    linkFullImages = true
 
 # ----- Navigation Menu -------------------
 [outputs]
