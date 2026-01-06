@@ -1,0 +1,17 @@
+baseURL = "http://localhost:1313/"
+languageCode = "vi-vn"
+title = "Tùng Blog"
+theme = "PaperMod"
+
+enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 10
+
+[params]
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowBreadCrumbs = true
+  ShowPostNavLinks = true
+  ShowCodeCopyButtons = true
+  defaultTheme = "light"

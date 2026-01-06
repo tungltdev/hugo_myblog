@@ -1,0 +1,25 @@
+# Hugo build output
+/public/
+/resources/_gen/
+/.hugo_build.lock
+
+# OS & editor junk
+.DS_Store
+Thumbs.db
+
+# Node / frontend junk (nếu có)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Env secrets
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# Cache
+*.log
