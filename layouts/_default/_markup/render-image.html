@@ -1,8 +1,4 @@
 {{- $u := .Destination -}}
 {{- $txt := .Text -}}
 {{- $title := .Title -}}
-<img src="{{ $u | safeURL }}" 
-     alt="{{ $txt }}" 
-     {{ with $title }} title="{{ . }}" {{ end }} 
-     loading="lazy" 
-     decoding="async">
+<img src="{{ $u | safeURL }}" alt="{{ $txt }}" {{ with $title }} title="{{ . }}" {{ end }} loading="lazy" decoding="async">
