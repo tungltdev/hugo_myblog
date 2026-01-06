@@ -16,3 +16,7 @@ enableRobotsTXT = true
   ShowCodeCopyButtons = true
   defaultTheme = "light"
   description = "Blog hướng dẫn AI, SEO, tự động hóa, Hugo & kiếm tiền online 2026."
+
+[minify]
+  disableXML = true
+  minifyOutput = true
