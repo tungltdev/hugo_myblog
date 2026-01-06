@@ -46,17 +46,17 @@ enableRobotsTXT = true
 [menu]
   [[menu.main]]
     name = "Tìm kiếm"
-    url = "/search"
+    url = "search/"
     weight = 1
 
   [[menu.main]]
     name = "Danh mục"
-    url = "/categories"
+    url = "categories/"
     weight = 2
 
   [[menu.main]]
     name = "Tags"
-    url = "/tags"
+    url = "tags/"
     weight = 3
 
   [[menu.main]]
