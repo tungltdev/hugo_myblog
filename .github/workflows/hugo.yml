@@ -1,4 +1,4 @@
-name: Deploy Hugo site
+name: Deploy Hugo site to GitHub Pages
 
 on:
   push:
@@ -10,32 +10,42 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - uses: peaceiris/actions-hugo@v3
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: latest
           extended: true
 
-      - run: hugo --environment production --minify
+      - name: Build site
+        run: hugo --environment production --minify
 
-      - uses: actions/upload-pages-artifact@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
   deploy:
-    needs: build
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - uses: actions/deploy-pages@v2
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
