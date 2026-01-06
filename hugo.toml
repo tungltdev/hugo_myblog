@@ -17,11 +17,6 @@ enableRobotsTXT = true
   defaultTheme = "light"
   description = "Blog hướng dẫn AI, SEO, tự động hóa, Hugo & kiếm tiền online 2026."
 
-# Remove accents in taxonomy URLs
-disablePathToLower = false
-preserveTaxonomyNames = false
-removePathAccents = true
-
 # ----- Navigation Menu -------------------
 [outputs]
   home = ["HTML", "RSS", "JSON"]
